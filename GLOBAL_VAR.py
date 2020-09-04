@@ -1,3 +1,4 @@
-GRAPHS = {}
+
+GRAPHS = []
 NODES = {}
 

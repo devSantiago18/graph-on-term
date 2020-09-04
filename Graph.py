@@ -1,8 +1,4 @@
 #undirected graph
-import GLOBAL_VAR as gl_var
-
-
-
 class Node:
     _index = 0
     def __init__(self,id: int):
@@ -20,12 +16,27 @@ class Graph:
         self.nodes = []
         self.edges = []
 
-    def create_edge(self):
-        pass
-    
+    def create_edge(self, a:int, b:int) -> None:
+        nodeA, nodeB = self.nodes[a], self.nodes[b]
+        if nodeA and nodeB:
+            self.edges.append((nodeA, nodeB))
+            nodeA.adyacents.add(nodeB.id)
+            nodeB.adyacents.add(nodeA.id)
 
-    def graph_matrix():
-        pass
+    def add_node(self, node: Node) -> None:
+        if node not in self.nodes:
+            self.nodes.append(node)
+
+    def graph_matrix() -> list:
+        m = [[0 for y in self.nodes] for x in self.nodes]
+        for nd_a, nd_b in self.edges:
+            m[nd_a._index][nd_b._index] = 1
+        return m
+    
+    def __repr__(self):
+        return f"Graph: {self.name}\nNodes: {self.nodes}"
+
+
 
 if __name__ == '__main__':
     print(Node._index)
