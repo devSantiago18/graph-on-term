@@ -1,9 +1,9 @@
 #undirected graph
 class Node:
     _index = 0
-    def __init__(self,id: int):
-        self.id = id
-        self.adyacents = {} # List of nodes
+    def __init__(self,_id: int):
+        self.id = _id
+        self.adyacents = set() # List of nodes
         self.index = Node._index 
         Node._index +=1
 
@@ -14,23 +14,27 @@ class Graph:
     def __init__(self, name: str="unnamed"):
         self.name = name
         self.nodes = []
-        self.edges = []
+        self.edges = set()
 
     def create_edge(self, a:int, b:int) -> None:
-        nodeA, nodeB = self.nodes[a], self.nodes[b]
-        if nodeA and nodeB:
-            self.edges.append((nodeA, nodeB))
-            nodeA.adyacents.add(nodeB.id)
-            nodeB.adyacents.add(nodeA.id)
+        nodeA, nodeB = 0,0
+        print(a,b)
+        for n in self.nodes:
+            if n.id == a:
+                nodeA = n
+            elif n.id == b:
+                nodeB = n
+        self.edges.add((nodeA, nodeB))
+
 
     def add_node(self, node: Node) -> None:
         if node not in self.nodes:
             self.nodes.append(node)
 
-    def graph_matrix() -> list:
+    def graph_matrix(self) -> list:
         m = [[0 for y in self.nodes] for x in self.nodes]
         for nd_a, nd_b in self.edges:
-            m[nd_a._index][nd_b._index] = 1
+            m[self.nodes.index(nd_a)][self.nodes.index(nd_b)] = 1
         return m
     
     def __repr__(self):
