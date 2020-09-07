@@ -1,6 +1,18 @@
-from Graph import Node, Graph
-from GLOBAL_VAR import NODES, GRAPHS
+from Graph import Graph
+from Node import Node
+from GLOBAL_VAR import GRAPHS
+from pynput import keyboard
+from view_terminal import *
 
+
+
+def on_press(key):
+    pass
+
+
+
+def on_release(key):
+    pass
 
 def create_graph():
     name = input("Graph name is: ")
@@ -22,7 +34,6 @@ def create_node():
 def show_matrix():
     g = get_graph(input("Graph name is: "))
     m = g.graph_matrix()
-    print(m)
     sr = str()
     for x in range(len(m)):
         sr += '[ '
@@ -30,16 +41,11 @@ def show_matrix():
             sr+= '{} '.format(m[x][y])
         sr += "]\n"
     print(sr)
+
+def infinity_while():
+    pass
+
 def main():
-    """print(f'GRAPHS: {GRAPHS}')
-    create_graph()
-    print(f'GRAPHS: {GRAPHS}')
-    create_node()
-    create_node()
-    create_node()
-    create_node()
-    show_matrix()
-    """
     g = Graph("s")
     g.add_node(Node(1))
     g.add_node(Node(2))
@@ -56,5 +62,11 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    with keyboard.Listener(
+            on_press=on_press,
+            on_release=on_release
+            ) as listener:
+
+        main()
+        listener.join()
 

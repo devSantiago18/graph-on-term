@@ -1,14 +1,4 @@
-#undirected graph
-class Node:
-    _index = 0
-    def __init__(self,_id: int):
-        self.id = _id
-        self.adyacents = set() # List of nodes
-        self.index = Node._index 
-        Node._index +=1
-
-    def __repr__(self):
-        return f"Node: {self.id}"
+from Node import Node
 
 class Graph:
     def __init__(self, name: str="unnamed"):
@@ -18,14 +8,14 @@ class Graph:
 
     def create_edge(self, a:int, b:int) -> None:
         nodeA, nodeB = 0,0
-        print(a,b)
         for n in self.nodes:
             if n.id == a:
                 nodeA = n
             elif n.id == b:
                 nodeB = n
         self.edges.add((nodeA, nodeB))
-
+        nodeA.adyacents.add(nodeB)
+        nodeB.adyacents.add(nodeA)
 
     def add_node(self, node: Node) -> None:
         if node not in self.nodes:
